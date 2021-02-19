@@ -1,0 +1,20 @@
+name: Build Skeleton
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.9.0
+        with:
+          php-version: 7.4
+          extensions: opcache, gd
+      - name: Generate Skeleton Package
+        uses: w00fz/skeleton-builder@v1.0.0
+          
