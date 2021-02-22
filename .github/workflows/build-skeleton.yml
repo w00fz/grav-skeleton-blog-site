@@ -28,3 +28,4 @@ jobs:
           file: dist/*.zip
           overwrite: true
           file_glob: true
+          verbose: true
