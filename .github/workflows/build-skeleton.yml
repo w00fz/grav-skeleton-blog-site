@@ -12,13 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Generate Skeleton Package
+      - name: Generate Skeleton Packages
         uses: w00fz/skeleton-builder@main
-      - uses: xresloader/upload-to-github-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload packages to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          file: "dist/*.zip"
-          draft: false
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref }}
+          file: dist/*.zip
           overwrite: true
-          update_latest_release: true
+          file_glob: true
+
