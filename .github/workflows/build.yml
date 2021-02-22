@@ -14,10 +14,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Generate Skeleton Package
         uses: w00fz/skeleton-builder@main
+        with:
+          verbose: true
       - uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           file: "/build/*.zip"
-          tags: true
           overwrite: true
