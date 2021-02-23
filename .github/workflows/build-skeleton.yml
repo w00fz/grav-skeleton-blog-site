@@ -11,6 +11,14 @@ on:
         description: 'Target tag for re-upload'     
         required: true
         default: ''
+      version:
+        description: 'Which Grav release to use'
+        required: true
+        default: 'latest'
+      admin:
+        description: 'Create also a package with Admin'
+        required: true
+        default: true
 
 jobs:
   build:
@@ -21,6 +29,9 @@ jobs:
         run: echo "SKELETON_VERSION=${{ github.event.inputs.tag || github.ref }}" >> $GITHUB_ENV
       - name: Generate Skeleton Packages
         uses: w00fz/skeleton-builder@main
+        with:
+          version: ${{ github.event.inputs.version }}
+          admin: ${{ github.event.inputs.admin }}
       - name: Upload packages to release
         uses: svenstaro/upload-release-action@v2
         with:
