@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Release version to target for re-upload'     
+        description: 'Target tag for re-upload'     
         required: true
         default: ''
 
@@ -18,8 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Extract Tag
-        run: |
-          echo "tag=$([ '$GITHUB_EVENT_NAME' == 'workflow_dispatch' ] && echo '$GITHUB_EVENT_INPUTS_TAG' || echo '$GITHUB_REF')" >> $GITHUB_ENV
+        run: echo "tag=${GITHUB_EVENT_INPUTS_TAG:-$GITHUB_REF}"
       - name: Generate Skeleton Packages
         uses: w00fz/skeleton-builder@main
       - name: Upload packages to release
