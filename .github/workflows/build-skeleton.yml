@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Extract Tag
-        run: echo "tag=${github.event.inputs.tag:-$github.ref}" >> $GITHUB_ENV
+        run: echo "tag=${{ github.event.inputs.tag || $github.ref }} >> $GITHUB_ENV
       - name: Generate Skeleton Packages
         uses: w00fz/skeleton-builder@main
       - name: Upload packages to release
