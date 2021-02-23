@@ -23,7 +23,6 @@ jobs:
       - name: Generate Skeleton Packages
         uses: w00fz/skeleton-builder@main
       - name: Upload packages to release
-        if: github.event_name == 'workflow_dispatch'
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
