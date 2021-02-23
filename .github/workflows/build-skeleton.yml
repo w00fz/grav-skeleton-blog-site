@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Extract Tag
-        run: echo "tag=${GITHUB_EVENT_INPUTS_TAG:-$GITHUB_REF}"
+        run: echo "tag=${GITHUB_EVENT_INPUTS_TAG:-$GITHUB_REF}" >> $GITHUB_ENV
       - name: Generate Skeleton Packages
         uses: w00fz/skeleton-builder@main
       - name: Upload packages to release
@@ -29,4 +29,3 @@ jobs:
           file: dist/*.zip
           overwrite: true
           file_glob: true
-          verbose: true
