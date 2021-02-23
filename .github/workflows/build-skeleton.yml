@@ -30,8 +30,8 @@ jobs:
       - name: Generate Skeleton Packages
         uses: w00fz/skeleton-builder@main
         with:
-          version: ${{ github.event.inputs.version }}
-          admin: ${{ github.event.inputs.admin }}
+          version: ${{ github.event.inputs.version || 'latest' }}
+          admin: ${{ github.event.inputs.admin || true }}
       - name: Upload packages to release
         uses: svenstaro/upload-release-action@v2
         with:
