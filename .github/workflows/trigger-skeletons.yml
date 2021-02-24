@@ -1,8 +1,6 @@
-name: Tirgger Skeletons Build
+name: Trigger Skeletons Build
 
 on:
-  release:
-    types: [ published ]
   workflow_dispatch:
     inputs:
       version:
@@ -31,15 +29,6 @@ jobs:
             VERSION=$(echo "$SKELETON" | jq -cr '.[]')
             URL="https://api.github.com/repos/${KEY}/actions/workflows/${WORKFLOW}/dispatches"
             
-            curl -XPOST -u "${AUTH}" \
-            -H "Accept: application/vnd.github.everest-preview+json" \
-            -H "Content-Type: application/json" ${URL} \
-            --data '{ "ref": "master", 
-                      "inputs": { 
-                        "tag": "'"$VERSION"'"", 
-                        "version": "'"$INPUT_VERSION"'", 
-                        "admin": "'"$INPUT_ADMIN"'" 
-                      } 
-                    }'
+            echo $KEY - $VERSION - $URL
             echo "Dispatched Worfklow for ${KEY}@$VERSION"
           done
