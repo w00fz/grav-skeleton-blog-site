@@ -25,7 +25,8 @@ jobs:
       - name: Make it rain ☔️
         run: |
           SKELETONS=`curl -s "${{secrets.SKELETONS_JSON_LIST}}"`
-          echo $SKELETONS | jq -r '.[]' | while read SKELETON; do
+          echo "$SKELETONS"
+          echo "$SKELETONS" | jq -cr '.[]' | while read SKELETON; do
             KEY=$(echo "$SKELETON" | jq -cr 'keys[0]')
             VERSION=$(echo "$SKELETON" | jq -cr '.[]')
             URL="https://api.github.com/repos/${KEY}/actions/workflows/${WORKFLOW}/dispatches"
