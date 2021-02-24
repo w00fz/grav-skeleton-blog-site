@@ -5,10 +5,6 @@ on:
     types: [ published ]
   workflow_dispatch:
     inputs:
-      tag:
-        description: 'Target tag for re-upload'     
-        required: true
-        default: ''
       version:
         description: 'Which Grav release to use'
         required: true
