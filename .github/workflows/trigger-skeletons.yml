@@ -18,13 +18,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SKELETONS: $(curl -s "${{secrets.SKELETONS_JSON_LIST}}")
       WORKFLOW: "build-skeleton.yml"
       AUTH: ":${{secrets.GLOBAL_TOKEN}}"
     steps:
       - uses: actions/checkout@v2
       - name: Make it rain ☔️
         run: |
+          SKELETONS=`curl -s "${{secrets.SKELETONS_JSON_LIST}}"
           echo $SKELETONS | jq -r '.[]' | while read SKELETON; do
             KEY=$(echo "$SKELETON" | jq -cr 'keys[0]')
             VERSION=$(echo "$SKELETON" | jq -cr '.[]')
