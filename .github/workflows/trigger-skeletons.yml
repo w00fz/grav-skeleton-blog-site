@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SKELETONS=`curl -s "${{secrets.SKELETONS_JSON_LIST}}"`
+      SKELETONS=$(curl -s "${{secrets.SKELETONS_JSON_LIST}}")
       WORKFLOW="build-skeleton.yml"
       AUTH=":${{secrets.GLOBAL_TOKEN}}"
     steps:
